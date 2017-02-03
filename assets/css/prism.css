@@ -1,15 +1,15 @@
-/* http://prismjs.com/download.html?themes=prism-okaidia&languages=markup+css+clike+javascript+c+cpp+git+json+matlab+python&plugins=previewer-base+previewer-color */
+/* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript+c+cpp+git+json+matlab&plugins=toolbar+command-line+show-language+copy-to-clipboard */
 /**
- * okaidia theme for JavaScript, CSS and HTML
- * Loosely based on Monokai textmate theme by http://www.monokai.nl/
- * @author ocodia
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
  */
 
 code[class*="language-"],
 pre[class*="language-"] {
-	color: #f8f8f2;
+	color: black;
 	background: none;
-	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	text-shadow: 0 1px white;
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	text-align: left;
 	white-space: pre;
@@ -28,17 +28,35 @@ pre[class*="language-"] {
 	hyphens: none;
 }
 
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
 /* Code blocks */
 pre[class*="language-"] {
 	padding: 1em;
 	margin: .5em 0;
 	overflow: auto;
-	border-radius: 0.3em;
 }
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-	background: #272822;
+	background: #f5f2f0;
 }
 
 /* Inline code */
@@ -56,7 +74,7 @@ pre[class*="language-"] {
 }
 
 .token.punctuation {
-	color: #f8f8f2;
+	color: #999;
 }
 
 .namespace {
@@ -65,15 +83,12 @@ pre[class*="language-"] {
 
 .token.property,
 .token.tag,
+.token.boolean,
+.token.number,
 .token.constant,
 .token.symbol,
 .token.deleted {
-	color: #f92672;
-}
-
-.token.boolean,
-.token.number {
-	color: #ae81ff;
+	color: #905;
 }
 
 .token.selector,
@@ -82,31 +97,32 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-	color: #a6e22e;
+	color: #690;
 }
 
 .token.operator,
 .token.entity,
 .token.url,
 .language-css .token.string,
-.style .token.string,
-.token.variable {
-	color: #f8f8f2;
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
 }
 
 .token.atrule,
 .token.attr-value,
-.token.function {
-	color: #e6db74;
+.token.keyword {
+	color: #07a;
 }
 
-.token.keyword {
-	color: #66d9ef;
+.token.function {
+	color: #DD4A68;
 }
 
 .token.regex,
-.token.important {
-	color: #fd971f;
+.token.important,
+.token.variable {
+	color: #e90;
 }
 
 .token.important,
@@ -121,74 +137,96 @@ pre[class*="language-"] {
 	cursor: help;
 }
 
-.prism-previewer,
-.prism-previewer:before,
-.prism-previewer:after {
-	position: absolute;
-	pointer-events: none;
+pre.code-toolbar {
+	position: relative;
 }
-.prism-previewer,
-.prism-previewer:after {
-	left: 50%;
-}
-.prism-previewer {
-	margin-top: -48px;
-	width: 32px;
-	height: 32px;
-	margin-left: -16px;
 
+pre.code-toolbar > .toolbar {
+	position: absolute;
+	top: .3em;
+	right: .2em;
+	transition: opacity 0.3s ease-in-out;
 	opacity: 0;
-	-webkit-transition: opacity .25s;
-	-o-transition: opacity .25s;
-	transition: opacity .25s;
-}
-.prism-previewer.flipped {
-	margin-top: 0;
-	margin-bottom: -48px;
-}
-.prism-previewer:before,
-.prism-previewer:after {
-	content: '';
-	position: absolute;
-	pointer-events: none;
-}
-.prism-previewer:before {
-	top: -5px;
-	right: -5px;
-	left: -5px;
-	bottom: -5px;
-	border-radius: 10px;
-	border: 5px solid #fff;
-	box-shadow: 0 0 3px rgba(0, 0, 0, 0.5) inset, 0 0 10px rgba(0, 0, 0, 0.75);
 }
 
-.prism-previewer:after {
-	top: 100%;
-	width: 0;
-	height: 0;
-	margin: 5px 0 0 -7px;
-	border: 7px solid transparent;
-	border-color: rgba(255, 0, 0, 0);
-	border-top-color: #fff;
-}
-.prism-previewer.flipped:after {
-	top: auto;
-	bottom: 100%;
-	margin-top: 0;
-	margin-bottom: 5px;
-	border-top-color: rgba(255, 0, 0, 0);
-	border-bottom-color: #fff;
-}
-.prism-previewer.active {
+pre.code-toolbar:hover > .toolbar {
 	opacity: 1;
 }
-.prism-previewer-color {
-	background-image: linear-gradient(45deg, #bbb 25%, transparent 25%, transparent 75%, #bbb 75%, #bbb), linear-gradient(45deg, #bbb 25%, #eee 25%, #eee 75%, #bbb 75%, #bbb);
-	background-size: 10px 10px;
-	background-position: 0 0, 5px 5px;
+
+pre.code-toolbar > .toolbar .toolbar-item {
+	display: inline-block;
 }
-.prism-previewer-color:before {
-	background-color: inherit;
-	background-clip: padding-box;
+
+pre.code-toolbar > .toolbar a {
+	cursor: pointer;
+}
+
+pre.code-toolbar > .toolbar button {
+	background: none;
+	border: 0;
+	color: inherit;
+	font: inherit;
+	line-height: normal;
+	overflow: visible;
+	padding: 0;
+	-webkit-user-select: none; /* for button */
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+pre.code-toolbar > .toolbar a,
+pre.code-toolbar > .toolbar button,
+pre.code-toolbar > .toolbar span {
+	color: #bbb;
+	font-size: .8em;
+	padding: 0 .5em;
+	background: #f5f2f0;
+	background: rgba(224, 224, 224, 0.2);
+	box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);
+	border-radius: .5em;
+}
+
+pre.code-toolbar > .toolbar a:hover,
+pre.code-toolbar > .toolbar a:focus,
+pre.code-toolbar > .toolbar button:hover,
+pre.code-toolbar > .toolbar button:focus,
+pre.code-toolbar > .toolbar span:hover,
+pre.code-toolbar > .toolbar span:focus {
+	color: inherit;
+	text-decoration: none;
+}
+
+.command-line-prompt {
+	border-right: 1px solid #999;
+	display: block;
+	float: left;
+	font-size: 100%;
+	letter-spacing: -1px;
+	margin-right: 1em;
+	pointer-events: none;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.command-line-prompt > span:before {
+	color: #999;
+	content: ' ';
+	display: block;
+	padding-right: 0.8em;
+}
+
+.command-line-prompt > span[data-user]:before {
+	content: "[" attr(data-user) "@" attr(data-host) "] $";
+}
+
+.command-line-prompt > span[data-user="root"]:before {
+	content: "[" attr(data-user) "@" attr(data-host) "] #";
+}
+
+.command-line-prompt > span[data-prompt]:before {
+	content: attr(data-prompt);
 }
 
